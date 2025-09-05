@@ -5,9 +5,7 @@ import { BookOpen, MapPin, Briefcase, GraduationCap } from 'lucide-react';
 const RequirementForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    targetCourse: '',
     workExperience: '',
-    preferredUniversities: '',
     startDate: '',
     priorities: []
   });
@@ -100,22 +98,15 @@ const RequirementForm = () => {
                   <span className="text-blue-700 font-medium">Preferred Countries:</span>
                   <span className="ml-2 text-blue-800">{profileData?.preferred_countries?.join(', ') || 'Not specified'}</span>
                 </div>
+                <div>
+                  <span className="text-blue-700 font-medium">Intended Majors:</span>
+                  <span className="ml-2 text-blue-800">{profileData?.intended_majors?.filter(m => m).join(', ') || 'Not specified'}</span>
+                </div>
+                <div>
+                  <span className="text-blue-700 font-medium">University Shortlist:</span>
+                  <span className="ml-2 text-blue-800">{profileData?.university_shortlist || 'Not specified'}</span>
+                </div>
               </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Specific Program/Specialization
-              </label>
-              <input
-                type="text"
-                name="targetCourse"
-                value={formData.targetCourse}
-                onChange={handleInputChange}
-                placeholder="e.g., Machine Learning, International Business, Civil Engineering"
-                className="form-input"
-              />
-              <p className="text-xs text-gray-500 mt-1">Optional: Specify a particular specialization within your chosen field</p>
             </div>
 
             <div>
@@ -188,27 +179,6 @@ const RequirementForm = () => {
             </div>
           </div>
 
-          {/* Preferred Universities */}
-          <div className="card">
-            <div className="flex items-center mb-4">
-              <MapPin className="h-5 w-5 text-primary-600 mr-2" />
-              <h2 className="text-xl font-semibold text-gray-900">Dream Universities</h2>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Any specific universities you're interested in? (Optional)
-              </label>
-              <textarea
-                name="preferredUniversities"
-                value={formData.preferredUniversities}
-                onChange={handleInputChange}
-                rows={3}
-                placeholder="e.g., Stanford University, MIT, Harvard Business School..."
-                className="form-input"
-              />
-            </div>
-          </div>
 
           {/* Submit Button */}
           <div className="flex justify-between pt-6">
