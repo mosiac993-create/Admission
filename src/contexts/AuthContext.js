@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '../supabase/config';
+import { getAuthRedirectUrl } from '../config/environment';
 
 const AuthContext = createContext();
 
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/profile`
+        emailRedirectTo: getAuthRedirectUrl()
       }
     });
     if (error) {
@@ -41,6 +42,9 @@ export const AuthProvider = ({ children }) => {
   const signInWithGoogle = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: getAuthRedirectUrl()
+      }
     });
     if (error) throw error;
     return data;
