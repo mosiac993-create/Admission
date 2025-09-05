@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import About from './pages/About';
 import TestAuth from './pages/TestAuth';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import ProfileCreation from './pages/ProfileCreation';
 import RequirementForm from './pages/RequirementForm';
 import Dashboard from './pages/Dashboard';
@@ -24,6 +26,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/about" element={<About />} />
             <Route path="/test-auth" element={<TestAuth />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/profile" element={<ProfileCreation />} />
             <Route path="/requirements" element={<RequirementForm />} />
             <Route path="/dashboard" element={<Dashboard />} />
