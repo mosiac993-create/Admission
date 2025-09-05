@@ -5,14 +5,13 @@ import { BookOpen, MapPin, Briefcase, GraduationCap } from 'lucide-react';
 const RequirementForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    targetCountry: '',
     targetCourse: '',
-    studyLevel: '',
     workExperience: '',
     preferredUniversities: '',
     startDate: '',
     priorities: []
   });
+  const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
     // Check if user has completed profile
@@ -22,6 +21,10 @@ const RequirementForm = () => {
       navigate('/profile');
       return;
     }
+    
+    // Load profile data to display user's previous selections
+    const parsedProfile = JSON.parse(profile);
+    setProfileData(parsedProfile);
   }, [navigate]);
 
   const handleInputChange = (e) => {
@@ -85,65 +88,37 @@ const RequirementForm = () => {
               <h2 className="text-xl font-semibold text-gray-900">Study Preferences</h2>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Target Country *
-                </label>
-                <select
-                  name="targetCountry"
-                  value={formData.targetCountry}
-                  onChange={handleInputChange}
-                  className="form-input"
-                  required
-                >
-                  <option value="">Select country</option>
-                  <option value="USA">United States</option>
-                  <option value="UK">United Kingdom</option>
-                  <option value="Canada">Canada</option>
-                  <option value="Australia">Australia</option>
-                  <option value="Germany">Germany</option>
-                  <option value="Netherlands">Netherlands</option>
-                  <option value="Singapore">Singapore</option>
-                </select>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Study Level *
-                </label>
-                <select
-                  name="studyLevel"
-                  value={formData.studyLevel}
-                  onChange={handleInputChange}
-                  className="form-input"
-                  required
-                >
-                  <option value="">Select level</option>
-                  <option value="Bachelor's">Bachelor's Degree</option>
-                  <option value="Master's">Master's Degree</option>
-                  <option value="PhD">PhD</option>
-                  <option value="MBA">MBA</option>
-                </select>
+            {/* Display user's profile selections */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+              <h3 className="text-sm font-medium text-blue-900 mb-2">Your Profile Summary</h3>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="text-blue-700 font-medium">Target Degree:</span>
+                  <span className="ml-2 text-blue-800">{profileData?.degree_level_target || 'Not specified'}</span>
+                </div>
+                <div>
+                  <span className="text-blue-700 font-medium">Preferred Countries:</span>
+                  <span className="ml-2 text-blue-800">{profileData?.preferred_countries?.join(', ') || 'Not specified'}</span>
+                </div>
               </div>
             </div>
 
-            <div className="mt-4">
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Target Course/Field *
+                Specific Program/Specialization
               </label>
               <input
                 type="text"
                 name="targetCourse"
                 value={formData.targetCourse}
                 onChange={handleInputChange}
-                placeholder="e.g., Computer Science, Business Administration, Engineering"
+                placeholder="e.g., Machine Learning, International Business, Civil Engineering"
                 className="form-input"
-                required
               />
+              <p className="text-xs text-gray-500 mt-1">Optional: Specify a particular specialization within your chosen field</p>
             </div>
 
-            <div className="mt-4">
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Preferred Start Date *
               </label>
