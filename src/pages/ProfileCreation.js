@@ -108,11 +108,11 @@ const ProfileCreation = () => {
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
-            <span>Step 1 of 3</span>
+            <span>Step 1 of 2</span>
             <span>Profile Creation</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-primary-600 h-2 rounded-full w-1/3"></div>
+            <div className="bg-primary-600 h-2 rounded-full w-1/2"></div>
           </div>
         </div>
 

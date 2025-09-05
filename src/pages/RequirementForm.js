@@ -70,11 +70,11 @@ const RequirementForm = () => {
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
-            <span>Step 2 of 3</span>
+            <span>Step 2 of 2</span>
             <span>Requirements Form</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-primary-600 h-2 rounded-full w-2/3"></div>
+            <div className="bg-primary-600 h-2 rounded-full w-full"></div>
           </div>
         </div>
 
