@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import AuthGuard from './components/AuthGuard';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -15,6 +16,7 @@ import UniversityDetail from './pages/UniversityDetail';
 import SelfAssessment from './pages/SelfAssessment';
 import AIFeedback from './pages/AIFeedback';
 
+
 function App() {
   return (
     <AuthProvider>
@@ -28,12 +30,12 @@ function App() {
             <Route path="/test-auth" element={<TestAuth />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/profile" element={<ProfileCreation />} />
-            <Route path="/requirements" element={<RequirementForm />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/university/:id" element={<UniversityDetail />} />
-            <Route path="/assessment/:universityId" element={<SelfAssessment />} />
-            <Route path="/feedback/:universityId" element={<AIFeedback />} />
+            <Route path="/profile" element={<AuthGuard requireProfile={false} requireRequirements={false}><ProfileCreation /></AuthGuard>} />
+            <Route path="/requirements" element={<AuthGuard requireProfile={true} requireRequirements={false}><RequirementForm /></AuthGuard>} />
+            <Route path="/dashboard" element={<AuthGuard requireProfile={true} requireRequirements={true}><Dashboard /></AuthGuard>} />
+            <Route path="/university/:id" element={<AuthGuard requireProfile={true} requireRequirements={true}><UniversityDetail /></AuthGuard>} />
+            <Route path="/assessment/:universityId" element={<AuthGuard requireProfile={true} requireRequirements={true}><SelfAssessment /></AuthGuard>} />
+            <Route path="/feedback/:universityId" element={<AuthGuard requireProfile={true} requireRequirements={true}><AIFeedback /></AuthGuard>} />
           </Routes>
         </div>
       </Router>

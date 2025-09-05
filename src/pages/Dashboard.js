@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
-    // Load user data
+    // Load user data (App.js routing ensures data exists)
     const profile = JSON.parse(localStorage.getItem('userProfile') || '{}');
     const requirements = JSON.parse(localStorage.getItem('userRequirements') || '{}');
     setUserProfile({ ...profile, ...requirements });

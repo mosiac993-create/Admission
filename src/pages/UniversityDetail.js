@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getUniversityById } from '../data/mockUniversities';
+import { useSecurityCheck } from '../hooks/useProfileCheck';
 import { 
   ArrowLeft, 
   MapPin, 
@@ -10,7 +11,7 @@ import {
   BookOpen, 
   CheckCircle, 
   AlertCircle,
-  ExternalLink 
+  ExternalLink
 } from 'lucide-react';
 
 const UniversityDetail = () => {
@@ -18,6 +19,9 @@ const UniversityDetail = () => {
   const navigate = useNavigate();
   const [university, setUniversity] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
+  
+  // Security check - ensure user has completed profile and requirements
+  useSecurityCheck();
 
   useEffect(() => {
     const uni = getUniversityById(id);

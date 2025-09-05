@@ -50,7 +50,14 @@ const Signup = () => {
         return;
       }
       
-      navigate('/profile');
+      // Clear any existing profile/requirements data for new signup
+      localStorage.removeItem('userProfile');
+      localStorage.removeItem('userRequirements');
+      
+      // Small delay to ensure localStorage operations complete
+      setTimeout(() => {
+        navigate('/profile');
+      }, 100);
     } catch (error) {
       setError(error.message || 'Failed to create account. Please try again.');
       console.error('Signup error:', error);
@@ -64,7 +71,15 @@ const Signup = () => {
 
     try {
       await signInWithGoogle();
-      navigate('/profile');
+      
+      // Clear any existing profile/requirements data for new signup
+      localStorage.removeItem('userProfile');
+      localStorage.removeItem('userRequirements');
+      
+      // Small delay to ensure localStorage operations complete
+      setTimeout(() => {
+        navigate('/profile');
+      }, 100);
     } catch (error) {
       setError('Failed to sign up with Google.');
       console.error('Google sign up error:', error);

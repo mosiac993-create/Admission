@@ -29,7 +29,17 @@ const Login = () => {
 
     try {
       await login(formData.email, formData.password);
-      navigate('/dashboard');
+      // Check if user has completed profile and requirements
+      const userProfile = localStorage.getItem('userProfile');
+      const userRequirements = localStorage.getItem('userRequirements');
+      
+      if (!userProfile) {
+        navigate('/profile');
+      } else if (!userRequirements) {
+        navigate('/requirements');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (error) {
       setError('Failed to log in. Please check your credentials.');
       console.error('Login error:', error);
@@ -43,7 +53,17 @@ const Login = () => {
 
     try {
       await signInWithGoogle();
-      navigate('/dashboard');
+      // Check if user has completed profile and requirements
+      const userProfile = localStorage.getItem('userProfile');
+      const userRequirements = localStorage.getItem('userRequirements');
+      
+      if (!userProfile) {
+        navigate('/profile');
+      } else if (!userRequirements) {
+        navigate('/requirements');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (error) {
       setError('Failed to sign in with Google.');
       console.error('Google sign in error:', error);
